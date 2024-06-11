@@ -38,10 +38,10 @@
 
 
                                             @if($approbation->statut->id == 1)
-                                                <a class="ui tag label">{{$approbation->statut->designation}}</a>
+                                                <a class="ui tag label">  {{$approbation->statut->designation}}</a>
                                             <br>
                                             <br>
-                                                <div class="ui indicating progress" data-value="1" data-total="25" id="example1">
+                                                <div class="ui indicating progress" data-value="1" data-total="4" id="example1">
                                                     <div class="bar">
                                                         <div class="progress"></div>
                                                     </div>
@@ -51,7 +51,7 @@
                                                 <a class="ui tag yellow label">{{$approbation->statut->designation}}</a>
                                                 <br>
                                                 <br>
-                                                <div class="ui indicating progress" data-value="1" data-total="50" id="example1">
+                                                <div class="ui indicating progress" data-value="1" data-total="3" id="example1">
                                                     <div class="bar">
                                                         <div class="progress"></div>
                                                     </div>
@@ -64,7 +64,7 @@
                                                 <a class="ui tag blue label">{{$approbation->statut->designation}}</a>
                                                 <br>
                                                 <br>
-                                                <div class="ui blue indicating progress" data-value="1" data-total="100" id="example1">
+                                                <div class="ui blue indicating progress" data-value="1" data-total="1" id="example1">
                                                     <div class="bar">
                                                         <div class="progress"></div>
                                                     </div>
