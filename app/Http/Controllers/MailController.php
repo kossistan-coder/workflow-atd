@@ -8,9 +8,14 @@ use Illuminate\Support\Facades\Mail;
 
 class MailController extends Controller
 {
-    public function sendMail(Request $request){
-        Mail::to('to@example.com')->send(new AprouveDemande());
-
-        return redirect()->route('overview');
-    }
+//    public function sendMail(Request $request , $id){
+//        try {
+//            $user = \App\Models\User::find($id);
+//            Mail::to($user->email)->send(new AprouveDemande());
+//
+//            return redirect()->back('success','Un email a été envoyé ');
+//        }catch (\Exception $exception){
+//            return redirect()->back('error',"Une erreur s'est produite");
+//        }
+//    }
 }

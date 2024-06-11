@@ -189,14 +189,6 @@
 
   </div>
 </div>
-<script>
- $.toast({
-              title: 'LOOK',
-              message: 'See, how long i will last',
-              showProgress: 'bottom'
-              })
-              ;
 
-  </script>
 @endsection
 

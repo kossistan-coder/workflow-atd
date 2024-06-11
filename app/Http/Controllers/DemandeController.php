@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Demande;
+use App\Repositories\MailRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Repositories\RoleRepository;
@@ -11,15 +12,33 @@ class DemandeController extends Controller
 {
 
     protected $role;
+    protected $maillable;
 
-    public function __construct(RoleRepository $roleRepository)
+    public function __construct(RoleRepository $roleRepository , MailRepository $mailRepository)
     {
         $this->role = $roleRepository;
+        $this->maillable = $mailRepository;
+    }
+
+    public function mailText($id , $statut){
+        if ($statut == 2){
+            $this->maillable->sendMail($id , "Votre demande est en cours de traitement");
+        }elseif ($statut == 3){
+            $this->maillable->sendMail($id , "Votre demande a été rejetée ");
+        }else if ($statut == 4){
+            $this->maillable->sendMail($id , "Votre demande a été acceptée ");
+        }else {
+            $this->maillable->sendMail($id , "Rappel , vous avez une demande en  activité sur WORKFLOW-ATD ");
+        }
     }
 
     public  function  index($id){
         $demandes = Demande::where('user_id', $id)->get()->load(['statut','informations']);
-        $authorized = $this->role->getRoles();
+        if (Auth::guard('admins')->check()){
+            $authorized = $this->role->getRoles();
+        }else {
+            $authorized = 0;
+        }
 
         return view('admins.message', compact('demandes','authorized'));
     }
@@ -31,7 +50,13 @@ class DemandeController extends Controller
             return redirect()->back()->with('error',"Vous n'etes pas autorisé a executer cette action");
         }
 
-        Demande::find($id)->update(['statut_id' => $statut]);
+        $user = Demande::find($id);
+
+        $user->statut_id = $statut;
+
+        $user->save();
+
+        $this->mailText($user->user_id,$statut);
 
         return  redirect()->back()->with('message',"Staut de la demande modifiée avec succès");
 

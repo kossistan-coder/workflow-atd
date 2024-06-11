@@ -13,9 +13,21 @@
                     <div>
 
                         @foreach($demandes as $approbation)
-                            <div class="ui icon message">
+                            <div class="ui icon message" >
                                 <div>
-                                    <i class="inbox icon"></i>
+                                    <div >
+
+                                        <a  href="/demandes/{{$approbation->id}}/delete">
+                                            @if(\Illuminate\Support\Facades\Auth::guard('web')->user() !== null)
+                                                <div>
+                                                    <div class="ui red icon button mini">
+                                                        <i class="trash icon"></i>
+                                                    </div>
+                                                </div>
+                                            @endif
+                                        </a>
+                                    </div>
+                                    <br>
 
                                     <div class="content">
                                         <div class="header">
@@ -23,24 +35,41 @@
                                         </div>
                                         <p>{{$approbation->description}}</p>
                                         <div>
-                                            <a class="position" href="/demandes/{{$approbation->id}}/delete">
-                                                @if(\Illuminate\Support\Facades\Auth::guard('web')->user() !== null)
-                                                    <div>
-                                                        <div class="ui red icon button mini">
-                                                            <i class="trash icon"></i>
-                                                        </div>
-                                                    </div>
-                                                @endif
-                                            </a>
 
-                                            @if($approbation->statut->niveau == 1)
+
+                                            @if($approbation->statut->id == 1)
                                                 <a class="ui tag label">{{$approbation->statut->designation}}</a>
-                                            @elseif($approbation->statut->niveau == 2)
+                                            <br>
+                                            <br>
+                                                <div class="ui indicating progress" data-value="1" data-total="25" id="example1">
+                                                    <div class="bar">
+                                                        <div class="progress"></div>
+                                                    </div>
+
+                                                </div>
+                                            @elseif($approbation->statut->id == 2)
                                                 <a class="ui tag yellow label">{{$approbation->statut->designation}}</a>
-                                            @elseif($approbation->statut->niveau == 3)
+                                                <br>
+                                                <br>
+                                                <div class="ui indicating progress" data-value="1" data-total="50" id="example1">
+                                                    <div class="bar">
+                                                        <div class="progress"></div>
+                                                    </div>
+
+                                                </div>
+                                            @elseif($approbation->statut->id == 3)
                                                 <a class="ui tag red label">{{$approbation->statut->designation}}</a>
-                                            @elseif($approbation->statut->niveau == 4)
+
+                                            @elseif($approbation->statut->id == 4)
                                                 <a class="ui tag blue label">{{$approbation->statut->designation}}</a>
+                                                <br>
+                                                <br>
+                                                <div class="ui blue indicating progress" data-value="1" data-total="100" id="example1">
+                                                    <div class="bar">
+                                                        <div class="progress"></div>
+                                                    </div>
+
+                                                </div>
                                             @endif
 
 

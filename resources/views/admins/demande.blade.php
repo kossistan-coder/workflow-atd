@@ -71,10 +71,10 @@
                                                            Approuver la demande
 
                                                        </a>
-                                                       <a class="ui tiny button" href="/demandes/{{$approbation->niveau}}/edit/2">
+                                                       <a class="ui tiny button" href="/demandes/{{$approbation->id}}/edit/2">
                                                            Annuler
                                                        </a>
-                                                       <a class="ui tiny red button" href="/demandes/{{$approbation->niveau}}/edit/4">
+                                                       <a class="ui tiny red button" href="/demandes/{{$approbation->id}}/edit/4">
                                                            Rejetée
                                                        </a>
                                                    </div>
@@ -92,7 +92,7 @@
                    @else
                        <div class="flex-center">
                            <div class="ui message">
-                               <div >
+                               <div class="ui centered grid">
                                    <img src="{{asset('/dist/images/delivery.png')}}">
                                    <h3>AUCUN MESSAGE POUR LE MOMENT</h3>
                                </div>

@@ -33,12 +33,6 @@
 
 
         </tbody>
-        <tfoot>
-        <tr><th colspan="5">
-               <a class="ui label " href="">
-                   voir tous les demandes
-               </a>
-            </th>
-        </tr></tfoot>
+
     </table>
 </div>

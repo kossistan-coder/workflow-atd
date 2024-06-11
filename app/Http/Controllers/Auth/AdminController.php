@@ -47,13 +47,19 @@ class AdminController extends Controller
 
     }
 
-    public  function editRole(Request  $request,$id){
-       if (AdminRole::where('admin_id',$id)->count() > 0){
-           AdminRole::where('admin_id',$id)->update(['role_id'=>$request['roles']]);
-       }else {
+    public  function editRole(Request  $request,$id)
+    {
+        //return $this->auth->editRole($request,$id);
 
-           AdminRole::create(['admin_id'=>$id,'role_id'=>$request['roles']]);
-       }
-        return redirect()->back()->with('success','Role mise a jour avec succè');
+        if (AdminRole::where('admin_id',$id)->count() > 0){
+            AdminRole::where('admin_id',$id)->update(['role_id'=>$request['roles']]);
+
+        }else {
+
+            AdminRole::create(['admin_id'=>$id,'role_id'=>$request['roles']]);
+
+        }
+
+        return redirect()->back()->with('success','Role mise a jour avec succès');
     }
 }

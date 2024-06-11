@@ -16,9 +16,11 @@ class AprouveDemande extends Mailable
      *
      * @return void
      */
-    public function __construct()
+
+    protected $textParam;
+    public function __construct($text)
     {
-        //
+        $this->textParam = $text;
     }
 
     /**
@@ -29,7 +31,7 @@ class AprouveDemande extends Mailable
     public function build()
     {
         return $this->from('stan@test.com')
-            ->subject('Mon objet personnalisé')
-            ->view('emails.mail');
+            ->subject("Votre demande a été mise à jour")
+            ->view('emails.mail',['textParam' => $this->textParam]);
     }
 }

@@ -63,6 +63,7 @@ class AuthController extends Controller
 
 
             $request->session()->put('admin',Auth::guard('admins')->user());
+
             return redirect()->route('overview');
 
         }else if (Auth::guard('web')->attempt($credentials)){

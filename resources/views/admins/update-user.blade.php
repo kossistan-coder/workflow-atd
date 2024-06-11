@@ -9,6 +9,7 @@
               <form class="ui form" method="post">
                   @csrf
 
+
                   <div class="ui segment">
                       <div class="field">
 
@@ -45,19 +46,18 @@
                       <div class="ui two fields">
 
 
-
-
                           <div class="field">
-                              <button class="ui @if(!\Illuminate\Support\Facades\Auth::guard('admins')->user()->roles->contains('niveau',2)) disabled @endif   button blue" type="submit">
+                              <button class="ui   button blue" type="submit">
                                   <i class="edit icon"></i>
                                   Mettre à jour
                               </button>
                           </div>
                       </div>
-
+                  </div>
               </form>
           </div>
         </div>
 
     </div>
+
 @endsection

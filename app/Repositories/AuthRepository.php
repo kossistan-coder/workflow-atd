@@ -3,19 +3,35 @@
 namespace App\Repositories;
 
 use App\Models\Admin;
+use App\Models\AdminRole;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class AuthRepository
 {
+
+    public  function  editRole(Request $request,$id)
+    {
+        if (AdminRole::where('admin_id',$id)->count() > 0){
+            AdminRole::where('admin_id',$id)->update(['role_id'=>$request['roles']]);
+
+        }else {
+
+            AdminRole::create(['admin_id'=>$id,'role_id'=>$request['roles']]);
+
+        }
+
+    }
+
+
     public function updateUser(Request $request,$id){
         try {
             $credentials = $request->validate([
-                'email' => 'email|sometimes|unique:users,email,'.$id,
-                'nom' => 'string|sometimes|max:255',
-                'prenom' => 'string|sometimes',
-                'telephone' => 'numeric|sometimes|unique:users,telephone,'.$id,
+                'email' => 'sometimes|email|unique:users,email,'.$id,
+                'nom' => 'sometimes|string|max:255',
+                'prenom' => 'sometimes|string',
+                'telephone' => 'sometimes|numeric|unique:users,telephone,'.$id,
             ]);
 
             $user = User::find($id);

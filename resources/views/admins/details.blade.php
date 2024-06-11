@@ -66,23 +66,21 @@
                 <div class="field">
                     <!--Modal -->
 
-                    <form class="ui form " method="post" >
-                        <div class="ui modal">
+{{--                    <form class="ui form " method="post" >--}}
+{{--                        <div class="ui modal">--}}
 
-                            <div class="header">Modifier les roles</div>
-                            <div class="content">
-                                <x-role-drop-down/>
-                            </div>
-                            <div>
-                                <button class="ui black button" type="submit">
-                                    Modifer
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                    <div class="ui icon button " id="rolePop">
-                        <i class="edit icon"></i>
-                    </div>
+{{--                            <div class="header">Modifier les roles</div>--}}
+{{--                            <div class="content">--}}
+{{--                                <x-role-drop-down/>--}}
+{{--                            </div>--}}
+{{--                            <div>--}}
+{{--                                <button class="ui black button" type="submit">--}}
+{{--                                    Modifer--}}
+{{--                                </button>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </form>--}}
+
                 </div>
             </div>
 

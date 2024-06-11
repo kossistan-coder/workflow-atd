@@ -22,51 +22,58 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/users/{id}/update',[AuthController::class,'configuration'])->name('configuration');
-Route::post('/users/{id}/update',[AuthController::class,'updateConfiguration']);
+
 
 Route::get('/sendMail',[MailController::class,'sendMail'])->name('sendMail');
 
 Route::get('/overview', function () {
     return view('admins.overview');
-})->name('overview');
+})->name('overview')->middleware('auth.any');
 
 Route::get('/login',[\App\Http\Controllers\Auth\AuthController::class,'showLoginForm'])->name('login');
 Route::post('/login',[\App\Http\Controllers\Auth\AuthController::class,'login']);
 
-Route::post('/admins',[\App\Http\Controllers\Auth\AuthController::class,'registerAdmin']);
-
-Route::get('/admins',[\App\Http\Controllers\Auth\AdminController::class,'show'])->name('admins');
-Route::get('admins/{id}/details',[\App\Http\Controllers\Auth\AdminController::class,'details'])->name('details');
-Route::post('admins/{id}/details',[\App\Http\Controllers\Auth\AdminController::class,'edit']);
-Route::get('admins/roles/edit',[\App\Http\Controllers\Auth\AdminController::class,'create'])->name('role-edit');
-
-Route::post('/admins/{id}/roles/edit',[\App\Http\Controllers\Auth\AdminController::class,'editRole']);
-
-Route::get('/users/{id}/delete',[UserController::class,'deleteUser'])->name('delete-user');
-Route::get('/users/{id}/update',[UserController::class,'getUser'])->name('update-user');
-Route::post('/users/{id}/update',[UserController::class,'updateUser']);
-Route::post('users',[\App\Http\Controllers\Auth\UserController::class,'registerUser']);
-Route::get('users',[UserController::class,'show'])->name('users');
-Route::get('users/{id}/details',[UserController::class,'showDetails'])->name('user-details');
-Route::post('users/{id}/details',[UserController::class,'edit']);
-Route::post('users/{id}/demandes',[UserController::class,'createDemande'])->name('create-demande');
+Route::group(['middleware' => 'auth.any'], function () {
+    Route::get('/users/{id}/update',[AuthController::class,'configuration'])->name('configuration');
+    Route::post('/users/{id}/update',[AuthController::class,'updateConfiguration']);
 
 
-Route::get('/users/{id}/demandes',[UserController::class,'showDemandes'])->name('demandes');
+    Route::post('/admins',[\App\Http\Controllers\Auth\AuthController::class,'registerAdmin']);
 
-Route::get('/demandes/{id}',[DemandeController::class,'index'])->name('all-demandes');
-Route::post('/demandes/{id}',[UserController::class,'createDemande']);
+    Route::get('/admins',[\App\Http\Controllers\Auth\AdminController::class,'show'])->name('admins');
+    Route::get('admins/{id}/details',[\App\Http\Controllers\Auth\AdminController::class,'details'])->name('details');
+    Route::post('admins/{id}/details',[\App\Http\Controllers\Auth\AdminController::class,'edit']);
+    Route::get('admins/roles/edit',[\App\Http\Controllers\Auth\AdminController::class,'create'])->name('role-edit');
+
+    Route::post('/admins/{id}/roles/edit',[\App\Http\Controllers\Auth\AdminController::class,'editRole']);
+
+    Route::get('/users/{id}/delete',[UserController::class,'deleteUser'])->name('delete-user');
+    Route::get('/users/{id}/update',[UserController::class,'getUser'])->name('update-user');
+    Route::post('/users/{id}/update',[UserController::class,'updateUser']);
+    Route::post('/users',[\App\Http\Controllers\Auth\AuthController::class,'registerUser']);
+    Route::get('users',[UserController::class,'show'])->name('users');
+    Route::get('users/{id}/details',[UserController::class,'showDetails'])->name('user-details');
+    Route::post('users/{id}/details',[UserController::class,'edit']);
+    Route::post('users/{id}/demandes',[UserController::class,'createDemande'])->name('create-demande');
 
 
-Route::get('/demandes/{id}/edit/{statut}',[DemandeController::class,'editStatut'])->name('edit-statut');
-Route::get('/demandes/{id}/delete',[DemandeController::class,'destroy'])->name('delete-demande');
+    Route::get('/users/{id}/demandes',[UserController::class,'showDemandes'])->name('demandes');
 
-Route::get('logout',[\App\Http\Controllers\Auth\AuthController::class,'logout'])->name('logout');
+    Route::get('/demandes/{id}',[DemandeController::class,'index'])->name('all-demandes');
+    Route::post('/demandes/{id}',[UserController::class,'createDemande']);
 
 
-Route::get('/roles/{id}/delete',[RoleController::class,'delete'])->name('role-delete');
-Route::get('/roles/{id}/update',[RoleController::class,'show'])->name('role-update');
-Route::post('/roles/{id}/update',[RoleController::class,'update']);
-Route::get('roles',[RoleController::class,'index'])->name('roles');
-Route::post('roles',[RoleController::class,'create']);
+    Route::get('/demandes/{id}/edit/{statut}',[DemandeController::class,'editStatut'])->name('edit-statut');
+    Route::get('/demandes/{id}/delete',[DemandeController::class,'destroy'])->name('delete-demande');
+
+    Route::post('/logout',[\App\Http\Controllers\Auth\AuthController::class,'logout'])->name('logout');
+
+
+    Route::get('/roles/{id}/delete',[RoleController::class,'delete'])->name('role-delete');
+    Route::get('/roles/{id}/update',[RoleController::class,'show'])->name('role-update');
+    Route::post('/roles/{id}/update',[RoleController::class,'update']);
+    Route::get('roles',[RoleController::class,'index'])->name('roles');
+    Route::post('roles',[RoleController::class,'create']);
+});
+
+

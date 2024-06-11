@@ -31,7 +31,7 @@
                         <i class="lni lni-users " style="font-size: 15px;"></i>
                         <span> administrateurs</span>
                     </div>
-                    <div class="ui red mini label">51</div>
+{{--                    <div class="ui red mini label">51</div>--}}
                 </div>
             </a>
         @endif
@@ -42,7 +42,7 @@
                         <i class="lni lni-users " style="font-size: 15px;"></i>
                         <span> Vos demandes</span>
                     </div>
-                    <div class="ui blue mini label">51</div>
+{{--                    <div class="ui blue mini label">51</div>--}}
                 </div>
             </a>
         @endif
@@ -54,7 +54,7 @@
                         <i class="lni lni-users " style="font-size: 15px;"></i>
                         <span> utilisateurs</span>
                     </div>
-                    <div class="ui red mini label">51</div>
+{{--                    <div class="ui red mini label">51</div>--}}
                 </div>
             </a>
         @endif
@@ -121,13 +121,16 @@
 {{--                </div>--}}
 {{--            </div>--}}
 {{--        </a>--}}
-        <a id="logout" href="{{route('logout')}}">
-            <i class="sign out alternate icon"></i>
-            <span>
+        <form method="post" action="/logout" id="logout-form">
+            @csrf
+            <a onclick="event.preventDefault(); document.getElementById('logout-form').submit();" id="logout" href="{{route('logout')}}">
+                <i class="sign out alternate icon"></i>
+                <span>
 
                 Logout
             </span>
-        </a>
+            </a>
+        </form>
 
       </div>
       <div class="dimmed pusher">
@@ -137,22 +140,22 @@
                     <i class="sidebar black icon"></i>
                   </a>
             </div>
-            <div class="right menu">
-              <div class="item">
-                <div class="ui icon input" >
-                    <input type="text" placeholder="Search..." style="border-radius: 20px;">
-                    <i class=" search link icon"></i>
-                  </div>
-              </div>
-                <div class="item">
-                    <i class="lni lni-wechat" style="font-size: 20px;"></i>
-                    <div class="ui mini red label" style="margin-left: -10px;margin-bottom:10px;">2</div>
-                </div>
-                <div class="item">
-                    <i class="bell icon"></i>
-                </div>
+{{--            <div class="right menu">--}}
+{{--              <div class="item">--}}
+{{--                <div class="ui icon input" >--}}
+{{--                    <input type="text" placeholder="Search..." style="border-radius: 20px;">--}}
+{{--                    <i class=" search link icon"></i>--}}
+{{--                  </div>--}}
+{{--              </div>--}}
+{{--                <div class="item">--}}
+{{--                    <i class="lni lni-wechat" style="font-size: 20px;"></i>--}}
+{{--                    <div class="ui mini red label" style="margin-left: -10px;margin-bottom:10px;">2</div>--}}
+{{--                </div>--}}
+{{--                <div class="item">--}}
+{{--                    <i class="bell icon"></i>--}}
+{{--                </div>--}}
 
-            </div>
+{{--            </div>--}}
               </div>
           </header>
       </div>
@@ -166,6 +169,8 @@
       <script src="{{asset('/dist/components/dropdown.js')}}"></script>
       <script src="{{asset('/dist/components/toast.js')}}"></script>
       <script src="{{asset('/dist/components/transition.js')}}"></script>
+    <script src="{{asset('/dist/components/progress.js')}}"></script>
+
 
 
       <script>
@@ -173,15 +178,18 @@
 
         let dimmer = document.querySelector('.dimmer')
            let message = document.getElementById("message")
-           let success = document.getElementById("success")
+
            let rolePop = document.getElementById('back-black');
            let updateRole = document.getElementById('update-role');
            let updateModal = document.getElementById('updateModal');
-           let close = document.getElementById('close')
-           let error = document.getElementById('error')
+
 
 
         $(document).ready(function name(){
+
+            $('#example1')
+                .progress('increment')
+            ;
 
             rolePop.addEventListener('click',()=>{
                 $('.ui.modal')
@@ -279,12 +287,16 @@
       </script>
 
 <script>
+    let close = document.getElementById('close')
+    let error = document.getElementById('error')
+    let success = document.getElementById("fermer")
     error.addEventListener('click',()=>{
         message.classList.add('hidden') ;
     })
-    close.addEventListener('click',()=>{
-        success.classList.add('hidden') ;
+   close.addEventListener('click',()=>{
+       success.classList.add('hidden') ;
     })
 </script>
+
 </body>
 </html>
